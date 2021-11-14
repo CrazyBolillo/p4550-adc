@@ -68,19 +68,18 @@ void main(void) {
     OSCCON = 0x73;
     while (OSCCONbits.IOFS != 1);
     
-    PORTA = 0x00;
     TRISA = 0xFF;
     ADCON0 = 0x04;
     ADCON1 = 0x0D;
-    ADCON2 = 0xB2;
+    ADCON2 = 0x0E;
     
     PORTB = 0x00;
     TRISB = 0x00;
     
     ADCON0bits.ADON = 1;
     while (1) {
-        ADCON0bits.GO_nDONE = 1;
-        while (ADCON0bits.GO_nDONE == 1);
+        ADCON0bits.DONE = 1;
+        while (ADCON0bits.DONE == 1);
         PORTB = ADRESH;
     }
 }
